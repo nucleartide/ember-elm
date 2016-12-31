@@ -1,6 +1,6 @@
 # ember-elm
 
-This README outlines the details of collaborating on this Ember addon.
+TODO: you need to have elm installed
 
 ## Installation
 
