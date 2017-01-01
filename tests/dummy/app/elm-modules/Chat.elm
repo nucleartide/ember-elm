@@ -18,8 +18,8 @@ main =
 --
 
 type alias Model = {
-  server: String,
-  input: String,
+  server:   String,
+  input:    String,
   messages: List String
 }
 
