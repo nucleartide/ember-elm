@@ -14,8 +14,8 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments)
     this.$('input').emojiPicker({
-      height: '300px',
-      width: '450px'
+      //height: '300px',
+      width: '320px'
     })
     console.log(this.$('input').length)
     this.$('#emoji-input').on('keyup', this.onInput)

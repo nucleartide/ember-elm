@@ -1,5 +1,14 @@
-{{emoji-picker}}
-{{#elm-component src=Elm.Chat flags=flags}}
-testing elm component
-{{/elm-component}}
-{{outlet}}
+<div id="chat">
+  <div class="emoji-chat">
+    <h2>This is an Ember component.</h2>
+    {{emoji-picker}}
+
+    <h2>This is a button. <small>(Try clicking it!)</small></h2>
+    <button id="talk-to-elm">Send emojis to Elm</button>
+
+    <h2>This is an Elm component.</h2>
+    {{#elm-component src=Elm.Chat flags=flags}}
+      testing elm component
+    {{/elm-component}}
+  </div>
+</div>
