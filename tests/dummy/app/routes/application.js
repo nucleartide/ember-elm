@@ -1,8 +1,16 @@
 import Ember from 'ember';
+// import config from 'ember-elm/config/environment'
+import dummyConfig from 'dummy/config/environment'
 
 export default Ember.Route.extend({
+  init() {
+    console.log('lololol')
+    //config
+    dummyConfig
+    debugger
+  },
+
   setupController(controller, model) {
-    this._super(...arguments)
     controller.set('value', '👋')
   },
 

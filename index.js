@@ -1,5 +1,5 @@
 
-const ElmCompiler = require('./lib/broccoli-elm')
+const ElmCompiler = require('./broccoli-elm')
 const coffee = require('broccoli-coffee')
 const fs = require('fs')
 const util = require('util')

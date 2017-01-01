@@ -17,4 +17,4 @@ npm-debug.log*
 testem.log
 
 # elm
-elm-stuff/
+/elm-stuff
