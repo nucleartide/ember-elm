@@ -38,4 +38,3 @@ module.exports = {
     registry.add('js', new ElmPlugin)
   }
 }
-
