@@ -60,7 +60,7 @@ module.exports = class ElmCompiler extends CachingWriter {
         .join(path.sep)
 
       // make error cleaner
-      err.message = err.message.replace('- ' + abspath, `-- ${relpath} --`)
+      err.message = err.message.replace(`- ${abspath}`, `-- ${relpath} --`)
 
       // make error red
       err.message = chalk.red(err.message)
