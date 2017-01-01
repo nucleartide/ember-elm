@@ -15,12 +15,10 @@ export default Ember.Component.extend({
   setup(ports) {},
 
   didReceiveAttrs() {
-    this._super(...arguments)
-    if (!this.src) throw new Error('ElmComponent missing src object')
+    if (!this.src) throw new Error('elm-component missing src object')
   },
 
   didInsertElement() {
-    this._super(...arguments)
     const { ports } = this.src.embed(this.element, this.flags)
     this.setup(ports)
   }
