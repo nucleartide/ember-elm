@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
-import Elm from './elm'
+import Elm from './elm-modules'
 console.log(Elm)
 
 let App;

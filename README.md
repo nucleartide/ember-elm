@@ -2,6 +2,7 @@
 
 TODO: you need to have elm installed
 .gitignore elm-stuff
+babel compact false
 
 ## Installation
 

@@ -8,17 +8,20 @@ const { log } = require('broccoli-stew')
 
 class ElmPlugin {
   constructor() {
-    //this.name = 'ember-elm'
+    this.name = 'ember-elm'
     this.ext = 'elm'
-    //this.ext = 'js'
   }
 
-  toTree(tree, inputPath, outputPath, something) {
-    console.log(something.registry.app.import)
-    const logTree = log(new BroccoliMergeTrees([new ElmCompiler([tree], 'asdf'), tree]), { output: 'tree', label: '\n\n\n\n\n\nmy-app-name tree' });
-    return logTree
-    //return new ElmCompiler([logTree], 'asdf')
-    //return new ElmCompiler([tree], 'asdf')
+  toTree(tree, inputPath, outputPath, options) {
+    // tree.destDir is undefined when tree is a BroccoliMergeTree.
+    // So we use outputPath instead, which seems to work.
+    const destDir = tree.destDir || outputPath
+
+    const jsTree = tree
+    const elmTree = new ElmCompiler([tree], destDir)
+    const merged = new BroccoliMergeTrees([jsTree, elmTree])
+    // return log(merged, { output: 'tree' }) // debug
+    return merged
   }
 }
 
