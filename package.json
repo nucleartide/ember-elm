@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "broccoli-caching-writer": "^3.0.3",
+    "broccoli-coffee": "^0.7.0",
+    "broccoli-merge-trees": "^1.2.1",
     "chalk": "^1.1.3",
     "ember-cli-babel": "^5.1.7",
     "node-elm-compiler": "^4.2.1"
