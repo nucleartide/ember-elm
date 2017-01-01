@@ -8,9 +8,9 @@ const { log } = require('broccoli-stew')
 
 class ElmPlugin {
   constructor() {
-    this.name = 'ember-elm'
-    //this.ext = 'elm'
-    this.ext = 'js'
+    //this.name = 'ember-elm'
+    this.ext = 'elm'
+    //this.ext = 'js'
   }
 
   toTree(tree, inputPath, outputPath, something) {

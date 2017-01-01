@@ -1,6 +1,7 @@
 # ember-elm
 
 TODO: you need to have elm installed
+.gitignore elm-stuff
 
 ## Installation
 
