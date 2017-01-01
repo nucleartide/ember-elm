@@ -1,3 +1,15 @@
+.EmojiPicker {
+  text-align: center;
+}
+
+.EmojiPicker input {
+  width: 400px;
+  height: 125px;
+  font-size: 40px;
+}
+
+/* === */
+
 body {
   margin: 0;
   background-color: #5A6378;
