@@ -1,13 +1,13 @@
 <div id="chat">
   <div class="emoji-chat">
     <h2>This is an Ember component.</h2>
-    {{emoji-picker}}
+    {{emoji-picker value=value onChange=(action (mut value))}}
 
     <h2>This is a button. <small>(Try clicking it!)</small></h2>
-    <button id="talk-to-elm">Send emojis to Elm</button>
+    <button id="talk-to-elm" onclick={{route-action 'talkToElm'}}>Send emojis to Elm</button>
 
     <h2>This is an Elm component.</h2>
-    {{#elm-component src=Elm.Chat flags=flags}}
+    {{#elm-component src=Elm.Chat flags=flags ports=(route-action 'setupPorts')}}
       testing elm component
     {{/elm-component}}
   </div>
