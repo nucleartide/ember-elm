@@ -1,4 +1,4 @@
 module Something exposing (..)
 
-hello =;
+hello =
   "jason"
