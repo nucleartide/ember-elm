@@ -1,46 +1,19 @@
-import Ember from 'ember';
-import layout from './template';
+import Ember from 'ember'
+import hbs from 'htmlbars-inline-precompile'
 
 export default Ember.Component.extend({
-  layout,
+  // https://github.com/wedgies/jquery-emoji-picker/blob/667392f2a32370bcaad31c0780edb7cc6885f4bd/js/jquery.emojipicker.js#L266
+  layout: hbs`<input value={{value}} onkeyup={{action (mut value) value="target.value"}}> {{log value}}`,
   classNames: 'EmojiPicker',
-  value: '',
-
-  init() {
-    this._super(...arguments)
-    this.onInput = this.onInput.bind(this)
-  },
+  value: '👋',
 
   didInsertElement() {
     this._super(...arguments)
-    this.$('input').emojiPicker({
-      //height: '300px',
-      width: '320px'
-    })
-    console.log(this.$('input').length)
-    this.$('#emoji-input').on('keyup', this.onInput)
+    this.$('input').emojiPicker()
   },
 
   willDestroyElement() {
     this._super(...arguments)
-    this.$('#emoji-input').off('keyup', this.onInput)
     this.$('input').emojiPicker('destroy')
-    this.onInput = null
-  },
-
-  onInput() {
-    console.log('on input', this.$('#emoji-input').val())
-  },
-
-  input() {
-    console.log('input')
-  },
-
-  actions: {
-    updateValue(v) {
-      console.log('update value')
-      //debugger
-      this.set('value', v)
-    }
   }
-});
+})
