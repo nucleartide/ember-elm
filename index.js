@@ -36,5 +36,9 @@ module.exports = {
 
   setupPreprocessorRegistry(type, registry) {
     registry.add('js', new ElmPlugin)
+  },
+
+  isDevelopingAddon() {
+    return true
   }
 }

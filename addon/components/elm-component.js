@@ -1,9 +1,9 @@
 
 import Ember from 'ember'
-import layout from './template'
+import hbs from 'htmlbars-inline-precompile'
 
 export default Ember.Component.extend({
-  layout,
+  layout: hbs`{{yield}}`,
 
   // Elm module
   src: null,
@@ -19,7 +19,8 @@ export default Ember.Component.extend({
   },
 
   didInsertElement() {
-    const { ports } = this.src.embed(this.element, this.flags)
+    // TODO: testing flags
+    const { ports } = this.src.embed(this.element, this.flags || undefined)
     this.setup(ports)
   }
 })

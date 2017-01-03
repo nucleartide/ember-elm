@@ -1,0 +1,65 @@
+## Use
+
+#### Generate
+
+To get started, let's run through Elm's "Hello World" example.
+
+First, generate an Elm module:
+
+```
+ember g elm-module hello
+```
+
+This will generate an Elm file in your project, located at
+`app/elm-modules/Hello.elm`. You will see that a very basic Elm program has
+already been written for you:
+
+```elm
+module Hello exposing (..)
+
+import Html exposing (text)
+
+main =
+  text "hello world"
+```
+
+Take particular note of the `module Hello exposing (..)` declaration at the top
+of `Hello.elm` – like an ES6 file, every Elm file defines its own module. This
+particular module will simply output a `<div>` containing the text "hello world"
+to the screen.
+
+#### Componentize
+
+Great! Your project now contains an Elm module. To actually use that module, you
+should include `elm-modules` into your controller/component context so you can
+use it in a template. For example:
+
+```js
+import Ember from 'ember'
+import Elm from 'app/elm-modules'
+
+export default Ember.Component.extend({
+  Elm,
+
+  // rest of the component goes here...
+})
+```
+
+Finally, in your template, you can invoke `elm-component`:
+
+```hbs
+{{elm-component src=Elm.Hello}}
+```
+
+## API
+
+ember-elm provides a single component `elm-component`, that takes three inputs:
+
+`src`
+`flags`
+`setup`
+
+## Notes
+
+1. add elm-stuff/ to .gitignore
+2. babel compact false
