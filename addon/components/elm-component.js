@@ -19,8 +19,8 @@ export default Ember.Component.extend({
   },
 
   didInsertElement() {
-    // TODO: testing flags
-    const { ports } = this.src.embed(this.element, this.flags || undefined)
+    const flags = this.flags !== undefined ? this.flags : undefined
+    const { ports } = this.src.embed(this.element, flags)
     this.setup(ports)
   }
 })

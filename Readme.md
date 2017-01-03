@@ -3,18 +3,19 @@
 ember-elm lets you write Ember components in [Elm](http://elm-lang.org/)! It
 integrates cleanly with your existing Ember application, so you can experiment
 with Elm without having to migrate to another front-end stack. It also
-integrates with ember-cli, so you can develop Elm code with the full power of
-ember-cli's live reloading and addon ecosystem.
+integrates with ember-cli, so you can develop Elm code with live reloading,
+while having access to the full power of ember-cli's addon ecosystem.
 
-> ### [View the demo](https://nucleartide.github.io/ember-elm/)
+## Demo
+
+<a href="https://nucleartide.github.io/ember-elm/"><img alt="Demo" src="assets/demo.png"></a>
 
 ## Features
 
-- `elm-component` for using your Elm code in Ember
-- ember-cli blueprint for Elm modules
-- live-reload provided by ember-cli
-- leverage the combined power of the ember-cli and Elm ecosystems together in
-  one stack
+- Use your Elm code in Ember with `elm-component`
+- Generate Elm modules with `ember g elm-module`
+- Live reload with ember-cli
+- Leverage the power of the ember-cli and Elm ecosystems together in one stack
 
 ## Setup
 
@@ -29,16 +30,14 @@ Before you can install ember-elm, you need to have two things installed:
 
 ### Install
 
-Then, to install:
-
 ```
-ember install ember-elm
+$ ember install ember-elm
 ```
 
 Alternatively, if you're using Yarn:
 
 ```
-yarn add ember-elm --dev && ember g ember-elm
+$ yarn add ember-elm --dev && ember g ember-elm
 ```
 
 ## Use
@@ -50,7 +49,7 @@ To get started, let's get a simple "Hello World" example up and running.
 First, generate an Elm module:
 
 ```
-ember g elm-module hello
+$ ember g elm-module hello
 ```
 
 This will generate an Elm file in your project, located at
@@ -79,7 +78,7 @@ Elm module in a template. For example:
 
 ```js
 import Ember from 'ember'
-import Elm from 'app/elm-modules'
+import Elm from 'my-app/elm-modules'
 
 export default Ember.Component.extend({
   Elm,
@@ -94,14 +93,98 @@ Finally, in your template, you can invoke `elm-component`:
 {{elm-component src=Elm.Hello}}
 ```
 
-(output goes here)
+You should see a simple "hello world" output to the screen:
+
+> _Output:_
+>
+> <a href="assets/example_full.png"><img alt="Example" src="assets/example.png"></a>
+
+Congrats! If you've made it this far, you are up and running with Elm.
 
 ## API
 
+### `{{elm-component src=<Object> flags=<*> setup=<Function>}}`
+
+Pass in an Elm module to use it:
+
+```hbs
+{{elm-component src=Elm.Hello}}
+```
+
+If the Elm module requires [flags][3], pass them in and they will be passed to
+the Elm module:
+
+```hbs
+{{elm-component src=Elm.HelloWithFlags flags=(hash name='Dog')}}
+```
+
+To communicate with your Elm module, grab the functions that are passed via
+[ports][2]:
+
+```hbs
+{{elm-component src=Elm.Chat setup=(action 'setupPorts')}}
+```
+
+```js
+import Ember from 'ember'
+
+export default Ember.Controller.extend({
+  sendToElm() {},
+
+  actions: {
+    setupPorts(ports) {
+      this.set('sendToElm', ports.emoji.send)
+    },
+
+    winkyFace() {
+      this.get('sendToElm')(';)')
+    }
+  }
+})
+```
+
 ## Notes
+
+### elm-stuff
+
+ember-elm (via [node-elm-compiler][4]) will install Elm dependencies to
+`elm-stuff/`.  To avoid committing Elm deps to version control, run:
+
+```
+$ echo elm-stuff/ >> .gitignore
+```
+
+### Babel
+
+Babel will start stripping whitespace when the output of your compiled Elm
+modules exceeds 100KB. This obfuscates the output, making it harder to learn how
+it works. To disable this behavior, set the Babel "compact" option to false in
+your ember-cli-build.js:
+
+```js
+module.exports = function(defaults) {
+  const app = new EmberApp(defaults, {
+    babel: {
+      compact: false
+    }
+  })
+}
+```
 
 ## Badges
 
+![](https://img.shields.io/badge/license-MIT-blue.svg)
+![](https://img.shields.io/badge/status-stable-green.svg)
+
 ---
 
-Jason Tu
+> Jason Tu &nbsp;&middot;&nbsp;
+> Tide Software &nbsp;&middot;&nbsp;
+> GitHub [@nucleartide](https://github.com/nucleartide) &nbsp;&middot;&nbsp;
+> Twitter [@nucleartide](https://twitter.com/nucleartide) &nbsp;&middot;&nbsp;
+> Slack [@nucleartide](https://embercommunity.slack.com/messages/@nucleartide/)
+
+[1]: https://github.com/nucleartide/ember-elm/blob/7072c421333c072685b04f7a40d5d580d2cc2e92/tests/dummy/app/routes/application.js#L20
+[2]: https://guide.elm-lang.org/interop/javascript.html#ports
+[3]: https://guide.elm-lang.org/interop/javascript.html#flags
+[4]: https://github.com/rtfeldman/node-elm-compiler
