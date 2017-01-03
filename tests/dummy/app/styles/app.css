@@ -6,7 +6,7 @@
 .EmojiPicker input {
   box-sizing: border-box;
   font-size: 50px;
-  width: 280px;
+  width: 300px;
   height: 100px;
 }
 
@@ -72,7 +72,7 @@ body {
 }
 
 .emoji-chat {
-  width: 280px;
+  width: 300px;
   margin: 0 auto;
 }
 
