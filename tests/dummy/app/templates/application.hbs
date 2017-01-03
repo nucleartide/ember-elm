@@ -7,7 +7,7 @@
     <button id="talk-to-elm" onclick={{route-action 'talkToElm'}}>Send emojis to Elm</button>
 
     <h2>This is an Elm component.</h2>
-    {{#elm-component src=Elm.Chat flags=flags ports=(route-action 'setupPorts')}}
+    {{#elm-component src=Elm.Chat flags=flags setup=(route-action 'setupPorts')}}
       testing elm component
     {{/elm-component}}
   </div>
