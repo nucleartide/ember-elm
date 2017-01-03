@@ -1,10 +1,6 @@
 
 const ElmCompiler = require('./broccoli-elm')
-const coffee = require('broccoli-coffee')
-const fs = require('fs')
-const util = require('util')
 const BroccoliMergeTrees = require('broccoli-merge-trees')
-const { log } = require('broccoli-stew')
 
 class ElmPlugin {
   constructor() {
@@ -19,16 +15,14 @@ class ElmPlugin {
 
     const jsTree = tree
     const elmTree = new ElmCompiler([tree], destDir)
-    const merged = new BroccoliMergeTrees([jsTree, elmTree])
-    // return log(merged, { output: 'tree' }) // debug
-    return merged
+    return new BroccoliMergeTrees([jsTree, elmTree])
   }
 }
 
 /**
- * See https://ember-cli.com/api/classes/Addon.html
- *
  * @extends Addon
+ *
+ * See https://ember-cli.com/api/classes/Addon.html.
  */
 
 module.exports = {
@@ -36,9 +30,5 @@ module.exports = {
 
   setupPreprocessorRegistry(type, registry) {
     registry.add('js', new ElmPlugin)
-  },
-
-  isDevelopingAddon() {
-    return true
   }
 }

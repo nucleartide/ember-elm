@@ -1,1 +1,1 @@
-export { default } from 'ember-elm/components/elm-component/component'
+export { default } from 'ember-elm/components/elm-component';

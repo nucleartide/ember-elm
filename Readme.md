@@ -72,34 +72,44 @@ to the screen.
 
 ### Componentize
 
-Great! Your project now contains an Elm module. To actually use that module, you
-should include `elm-modules` into your controller/component so you can use your
-Elm module in a template. For example:
+Great! Your project now contains an Elm module. To actually use that module,
+include the file `<your-app>/elm-modules.js` into a controller/component, so
+that you can use your Elm module in a template.
+
+> _Note:_
+>
+> [Behind the scenes](broccoli-elm/index.js), ember-elm finds all Elm files in
+> your app tree, and compiles all of them into a single `elm-modules.js` file at
+> the root of your tree. So you can't import an Elm file directly – you have to
+> import `elm-modules.js`, and access properties on the imported object to get
+> the module you want.
+
+For example:
 
 ```js
+// routes/application.js
 import Ember from 'ember'
 import Elm from 'my-app/elm-modules'
 
-export default Ember.Component.extend({
-  Elm,
-
-  // rest of the component goes here...
+export default Ember.Route.extend({
+  setupController(controller, model) {
+    controller.set('Elm', Elm)
+  } 
 })
 ```
 
-Finally, in your template, you can invoke `elm-component`:
-
 ```hbs
+{{!-- templates/application.hbs --}}
 {{elm-component src=Elm.Hello}}
 ```
 
-You should see a simple "hello world" output to the screen:
+Once that's done, you should see a simple "hello world" output to the screen:
 
 > _Output:_
 >
 > <a href="assets/example_full.png"><img alt="Example" src="assets/example.png"></a>
 
-Congrats! If you've made it this far, you are up and running with Elm.
+Congrats! If you've made it this far, you are now up and running with Elm.
 
 ## API
 
@@ -129,7 +139,7 @@ To communicate with your Elm module, grab the functions that are passed via
 import Ember from 'ember'
 
 export default Ember.Controller.extend({
-  sendToElm() {},
+  sendToElm(emojis) {},
 
   actions: {
     setupPorts(ports) {
@@ -156,10 +166,9 @@ $ echo elm-stuff/ >> .gitignore
 
 ### Babel
 
-Babel will start stripping whitespace when the output of your compiled Elm
-modules exceeds 100KB. This obfuscates the output, making it harder to learn how
-it works. To disable this behavior, set the Babel "compact" option to false in
-your ember-cli-build.js:
+Babel will start stripping whitespace from `elm-modules.js` when it exceeds
+100KB. This makes it harder to learn how it works. To disable this behavior, set
+the Babel `compact` option to false in your `ember-cli-build.js`:
 
 ```js
 module.exports = function(defaults) {

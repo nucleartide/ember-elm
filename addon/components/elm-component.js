@@ -6,10 +6,10 @@ export default Ember.Component.extend({
   layout: hbs`{{yield}}`,
 
   // Elm module
-  src: null,
+  src: undefined,
 
   // anything you want to pass to the Elm module
-  flags: null,
+  flags: undefined,
 
   // function that is passed the Elm module's ports
   setup(ports) {},
@@ -19,8 +19,7 @@ export default Ember.Component.extend({
   },
 
   didInsertElement() {
-    const flags = this.flags !== undefined ? this.flags : undefined
-    const { ports } = this.src.embed(this.element, flags)
+    const { ports } = this.src.embed(this.element, this.flags)
     this.setup(ports)
   }
 })
