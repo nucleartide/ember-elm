@@ -1,17 +1,16 @@
 {
-  "name": "ember-elm",
+  "name": "ember-elm-helpers",
   "version": "0.1.0",
   "description": "Write Elm in your Ember app",
   "keywords": [
     "ember-addon",
     "elm",
     "ember",
-    "ember-elm",
-    "emoji",
+    "ember-elm-helpers",
     "ember-cli"
   ],
   "license": "MIT",
-  "author": "Jason Tu <jasontu4@gmail.com>",
+  "author": "Matthew Cheely <matt.cheely@gmail.com>",
   "repository": "https://github.com/nucleartide/ember-elm",
   "scripts": {
     "build": "rm -rf dist docs && ember build -prod && rm dist/.gitkeep && mv dist docs",
@@ -21,6 +20,7 @@
     "broccoli-caching-writer": "^3.0.3",
     "broccoli-merge-trees": "^1.2.1",
     "chalk": "^1.1.3",
+    "elm": "^0.18.0",
     "ember-cli-babel": "^5.1.7",
     "ember-cli-htmlbars-inline-precompile": "^0.3.3",
     "ember-cli-string-utils": "^1.0.0",
