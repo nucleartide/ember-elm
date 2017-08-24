@@ -11,7 +11,7 @@
   ],
   "license": "MIT",
   "author": "Matthew Cheely <matt.cheely@gmail.com>",
-  "repository": "https://github.com/nucleartide/ember-elm",
+  "repository": "https://github.com/MattCheely/ember-elm",
   "scripts": {
     "build": "rm -rf dist docs && ember build -prod && rm dist/.gitkeep && mv dist docs",
     "test": "ember try:each"

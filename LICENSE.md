@@ -1,6 +1,7 @@
 The MIT License (MIT)
 
-Copyright (c) 2016 Jason Tu
+Copyright (c) 2016 Jason Tu for work from ember-elm (https://github.com/nucleartide/ember-elm)
+All other work Copyright (c) 2017 Matthew Cheely
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
