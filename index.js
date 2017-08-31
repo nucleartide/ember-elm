@@ -4,7 +4,7 @@ const BroccoliMergeTrees = require('broccoli-merge-trees')
 
 class ElmPlugin {
   constructor(options) {
-    this.name = 'ember-elm';
+    this.name = 'ember-elm-components';
     this.ext = 'elm';
     this.options = options;
   }
@@ -26,7 +26,7 @@ class ElmPlugin {
  */
 
 module.exports = {
-  name: 'ember-elm',
+  name: 'ember-elm-components',
 
   setupPreprocessorRegistry(type, registry) {
     let options = this.options || {}

@@ -1,6 +1,6 @@
-![ember-elm: Reliably ambitious web applications.](assets/title.png)
+![ember-elm-components: Reliably ambitious web applications.](assets/title.png)
 
-ember-elm-helpers lets you write Ember components in [Elm](http://elm-lang.org/)! It
+ember-elm-components lets you write Ember components in [Elm](http://elm-lang.org/)! It
 integrates cleanly with your existing Ember application, so you can experiment
 with Elm without having to migrate to another front-end stack. It also
 integrates with ember-cli, so you can develop Elm code with live reloading,
@@ -17,7 +17,7 @@ while having access to the full power of ember-cli's addon ecosystem.
 
 ### Prerequisites
 
-Before you can install ember-elm-helpers, you need to have two things installed:
+Before you can install ember-elm-components, you need to have two things installed:
 
 1. **Node 6.0.0+ or up**. This is because this addon's [build code](index.js) uses
    ES6.
@@ -27,13 +27,13 @@ Before you can install ember-elm-helpers, you need to have two things installed:
 ### Install
 
 ```
-$ ember install ember-elm-helpers
+$ ember install ember-elm-components
 ```
 
 Alternatively, if you're using Yarn:
 
 ```
-$ yarn add ember-elm-helpers --dev && ember g ember-elm-helpers
+$ yarn add ember-elm-components --dev && ember g ember-elm-components
 ```
 
 ## Use
@@ -74,7 +74,7 @@ that you can use your Elm module in a template.
 
 > _Note:_
 >
-> [Behind the scenes](broccoli-elm/index.js), ember-elm-helpers finds all Elm files in
+> [Behind the scenes](broccoli-elm/index.js), ember-elm-components finds all Elm files in
 > your app tree, and compiles all of them into a single `elm-modules.js` file at
 > the root of your tree. So you can't import an Elm file directly – you have to
 > import `elm-modules.js`, and access properties on the imported object to get
@@ -153,7 +153,7 @@ export default Ember.Controller.extend({
 
 ### elm-stuff
 
-ember-elm-helpers (via [node-elm-compiler][4]) will install Elm dependencies to
+ember-elm-components (via [node-elm-compiler][4]) will install Elm dependencies to
 `elm-stuff/`.  To avoid committing Elm deps to version control, run:
 
 ```

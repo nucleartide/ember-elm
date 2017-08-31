@@ -1,12 +1,12 @@
 {
-  "name": "ember-elm-helpers",
+  "name": "ember-elm-components",
   "version": "0.1.0",
   "description": "Write Elm in your Ember app",
   "keywords": [
     "ember-addon",
     "elm",
     "ember",
-    "ember-elm-helpers",
+    "ember-elm-components",
     "ember-cli"
   ],
   "license": "MIT",
