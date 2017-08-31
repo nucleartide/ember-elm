@@ -1,14 +1,10 @@
-![ember-elm: Reliably ambitious web applications.](assets/title.png)
+![ember-elm-components: Reliably ambitious web applications.](assets/title.png)
 
-ember-elm lets you write Ember components in [Elm](http://elm-lang.org/)! It
+ember-elm-components lets you write Ember components in [Elm](http://elm-lang.org/)! It
 integrates cleanly with your existing Ember application, so you can experiment
 with Elm without having to migrate to another front-end stack. It also
 integrates with ember-cli, so you can develop Elm code with live reloading,
 while having access to the full power of ember-cli's addon ecosystem.
-
-## Demo
-
-<a href="https://nucleartide.github.io/ember-elm/"><img alt="Demo" src="assets/demo.png"></a>
 
 ## Features
 
@@ -21,7 +17,7 @@ while having access to the full power of ember-cli's addon ecosystem.
 
 ### Prerequisites
 
-Before you can install ember-elm, you need to have two things installed:
+Before you can install ember-elm-components, you need to have two things installed:
 
 1. **Node 6.0.0+ or up**. This is because this addon's [build code](index.js) uses
    ES6.
@@ -31,13 +27,13 @@ Before you can install ember-elm, you need to have two things installed:
 ### Install
 
 ```
-$ ember install ember-elm
+$ ember install ember-elm-components
 ```
 
 Alternatively, if you're using Yarn:
 
 ```
-$ yarn add ember-elm --dev && ember g ember-elm
+$ yarn add ember-elm-components --dev && ember g ember-elm-components
 ```
 
 ## Use
@@ -78,7 +74,7 @@ that you can use your Elm module in a template.
 
 > _Note:_
 >
-> [Behind the scenes](broccoli-elm/index.js), ember-elm finds all Elm files in
+> [Behind the scenes](broccoli-elm/index.js), ember-elm-components finds all Elm files in
 > your app tree, and compiles all of them into a single `elm-modules.js` file at
 > the root of your tree. So you can't import an Elm file directly – you have to
 > import `elm-modules.js`, and access properties on the imported object to get
@@ -157,7 +153,7 @@ export default Ember.Controller.extend({
 
 ### elm-stuff
 
-ember-elm (via [node-elm-compiler][4]) will install Elm dependencies to
+ember-elm-components (via [node-elm-compiler][4]) will install Elm dependencies to
 `elm-stuff/`.  To avoid committing Elm deps to version control, run:
 
 ```
@@ -180,20 +176,7 @@ module.exports = function(defaults) {
 }
 ```
 
-## Badges
-
-![](https://img.shields.io/badge/license-MIT-blue.svg)
-![](https://img.shields.io/badge/status-stable-green.svg)
-
----
-
-> Jason Tu &nbsp;&middot;&nbsp;
-> Tide Software &nbsp;&middot;&nbsp;
-> GitHub [@nucleartide](https://github.com/nucleartide) &nbsp;&middot;&nbsp;
-> Twitter [@nucleartide](https://twitter.com/nucleartide) &nbsp;&middot;&nbsp;
-> Slack [@nucleartide](https://embercommunity.slack.com/messages/@nucleartide/)
-
-[1]: https://github.com/nucleartide/ember-elm/blob/7072c421333c072685b04f7a40d5d580d2cc2e92/tests/dummy/app/routes/application.js#L20
+[1]: https://github.com/MattCheely/ember-elm/blob/7072c421333c072685b04f7a40d5d580d2cc2e92/tests/dummy/app/routes/application.js#L20
 [2]: https://guide.elm-lang.org/interop/javascript.html#ports
 [3]: https://guide.elm-lang.org/interop/javascript.html#flags
 [4]: https://github.com/rtfeldman/node-elm-compiler

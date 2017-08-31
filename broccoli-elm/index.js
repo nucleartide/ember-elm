@@ -7,6 +7,10 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const moduleNoise = require('./module-noise')
 
+const optionDefaults = {
+  yes: true
+}
+
 module.exports = class ElmCompiler extends CachingWriter {
 
   /**
@@ -15,16 +19,18 @@ module.exports = class ElmCompiler extends CachingWriter {
    * `this.outputPath`, which is computed by a parent class.
    */
 
-  constructor(inputNodes, destDir = '') {
+  constructor(inputNodes, destDir = '', options = {}) {
     super(inputNodes, {
       name: 'ElmCompiler',
       annotation: 'broccoli-elm',
       persistentOutput: false,
       cacheInclude: [/.*\.elm$/],
       cacheExclude: []
-    })
+    });
 
-    this.destDir = destDir
+    this.destDir = destDir;
+    let useDebug = process.env.EMBER_ENV != 'production';
+    this.options = Object.assign({debug: useDebug}, optionDefaults, options);
   }
 
   /**
@@ -34,7 +40,8 @@ module.exports = class ElmCompiler extends CachingWriter {
    */
 
   build() {
-    return compileToString(this.listFiles(), { yes: true }).then(data => {
+    let options = Object.assign({}, this.options);
+    return compileToString(this.listFiles(), options).then(data => {
       // elm-make output
       let d = data.toString()
 
@@ -57,20 +64,23 @@ module.exports = class ElmCompiler extends CachingWriter {
       fs.writeFileSync(path.join(dir, 'elm-modules.js'), d)
     }).catch(err => {
       // parse path from elm-make output
-      const [, abspath] = /-- [A-Z ]+ -+ (.+)/.exec(err.message)
-      const relpath = abspath
-        .replace(process.cwd(), '')
-        .split(path.sep)
-        .slice(3)
-        .join(path.sep)
+      const pathmatch = /-- [A-Z ]+ -+ (.+)/.exec(err.message);
+      if (pathmatch) {
+        const [, abspath] = pathmatch;
+        const relpath = abspath
+          .replace(process.cwd(), '')
+          .split(path.sep)
+          .slice(3)
+          .join(path.sep)
 
-      // make error cleaner
-      err.message = err.message.replace(`- ${abspath}`, `-- ${relpath} --`)
+        // make error cleaner
+        err.message = err.message.replace(`- ${abspath}`, `-- ${relpath} --`)
+      }
 
       // make error red
       err.message = chalk.red(err.message)
 
-      throw err
+      throw err;
     })
   }
 }
