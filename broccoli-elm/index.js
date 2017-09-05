@@ -57,15 +57,18 @@ module.exports = class ElmCompiler extends CachingWriter {
       fs.writeFileSync(path.join(dir, 'elm-modules.js'), d)
     }).catch(err => {
       // parse path from elm-make output
-      const [, abspath] = /-- [A-Z ]+ -+ (.+)/.exec(err.message)
-      const relpath = abspath
-        .replace(process.cwd(), '')
-        .split(path.sep)
-        .slice(3)
-        .join(path.sep)
+      const pathmatch = /-- [A-Z ]+ -+ (.+)/.exec(err.message);
+      if (pathmatch) {
+        const [, abspath] = pathmatch;
+        const relpath = abspath
+          .replace(process.cwd(), '')
+          .split(path.sep)
+          .slice(3)
+          .join(path.sep)
 
-      // make error cleaner
-      err.message = err.message.replace(`- ${abspath}`, `-- ${relpath} --`)
+        // make error cleaner
+        err.message = err.message.replace(`- ${abspath}`, `-- ${relpath} --`)
+      }
 
       // make error red
       err.message = chalk.red(err.message)
