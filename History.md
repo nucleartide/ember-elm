@@ -1,4 +1,11 @@
 
+v0.2.0 / 2017-09-08
+===================
+
+  * Misc updates (#16)
+  * Verify error message contains path before parsing (#13)
+  * Update title
+
 v0.1.0 / 2017-01-03
 ===================
 
