@@ -1,4 +1,9 @@
 
+v0.2.1 / 2017-10-03
+==================
+
+  * Fix option loading, and don't register complier for the addon itself. (#17)
+
 v0.2.0 / 2017-09-08
 ===================
 
