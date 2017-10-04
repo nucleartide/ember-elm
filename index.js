@@ -1,4 +1,3 @@
-
 const ElmCompiler = require('./broccoli-elm')
 const BroccoliMergeTrees = require('broccoli-merge-trees')
 
@@ -33,8 +32,12 @@ module.exports = {
   name: 'ember-elm',
 
   setupPreprocessorRegistry(type, registry) {
-    let options = this.options || {}
-    let elmOptions = options.elm;
-    registry.add('js', new ElmPlugin(elmOptions));
+    // No need to try to compile elm within the addon
+    if (type == 'parent') {
+      let app = this.app || this;
+      let options = app.options || {};
+      let elmOptions = options.elm;
+      registry.add('js', new ElmPlugin(elmOptions));
+    }
   }
 }
