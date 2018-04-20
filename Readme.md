@@ -1,5 +1,7 @@
 ![ember-elm: Reliably ambitious web applications.](assets/title.png)
 
+[![Ember Observer Score](https://emberobserver.com/badges/ember-elm.svg)](https://emberobserver.com/addons/ember-elm)
+
 ember-elm lets you write Ember components in [Elm](http://elm-lang.org/)! It
 integrates cleanly with your existing Ember application, so you can experiment
 with Elm without having to migrate to another front-end stack. It also
