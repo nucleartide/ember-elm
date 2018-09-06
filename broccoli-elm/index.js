@@ -6,9 +6,7 @@ const mkdirp = require("mkdirp");
 const path = require("path");
 const moduleNoise = require("./module-noise");
 
-const optionDefaults = {
-  yes: true
-};
+const optionDefaults = {};
 
 module.exports = class ElmCompiler extends CachingWriter {
   /**
@@ -28,7 +26,15 @@ module.exports = class ElmCompiler extends CachingWriter {
 
     this.destDir = destDir;
     let useDebug = process.env.EMBER_ENV != "production";
-    this.options = Object.assign({ debug: useDebug }, optionDefaults, options);
+    let optimize = process.env.EMBER_ENV == "production";
+    this.options = Object.assign(
+      {
+        debug: useDebug,
+        optimize: optimize
+      },
+      optionDefaults,
+      options
+    );
   }
 
   /**

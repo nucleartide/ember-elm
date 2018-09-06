@@ -1,4 +1,5 @@
-module Hello.Jesse exposing (..)
+module Hello.Jesse exposing (hello)
+
 
 hello =
-  "jesse"
+    "jesse"
