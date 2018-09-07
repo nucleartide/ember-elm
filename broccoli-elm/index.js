@@ -48,14 +48,14 @@ module.exports = class ElmCompiler extends CachingWriter {
     return compileToString(this.listFiles(), options)
       .then(data => {
         // elm-make output
-        let d = data.toString();
+        let jsStr = data.toString();
 
         // if there are no Elm files to compile, do nothing
-        if (!d) return;
+        if (!jsStr) return;
 
         // fix module exports
-        d = d.replace(
-          moduleNoise,
+        jsStr =
+          jsStr +
           `
         if (typeof exports == 'undefined') {
           define('${
@@ -65,33 +65,64 @@ module.exports = class ElmCompiler extends CachingWriter {
           });
         } else {
           exports['default'] = Elm;
-        }`
-        );
+        }`;
 
         // build
         const dir = path.join(this.outputPath, this.destDir);
         mkdirp.sync(dir);
-        fs.writeFileSync(path.join(dir, "elm-modules.js"), d);
+        fs.writeFileSync(path.join(dir, "elm-modules.js"), jsStr);
       })
       .catch(err => {
-        // parse path from elm-make output
-        const pathmatch = /-- [A-Z ]+ -+ (.+)/.exec(err.message);
-        if (pathmatch) {
-          const [, abspath] = pathmatch;
-          const relpath = abspath
-            .replace(process.cwd(), "")
-            .split(path.sep)
-            .slice(3)
-            .join(path.sep);
-
-          // make error cleaner
-          err.message = err.message.replace(`- ${abspath}`, `-- ${relpath} --`);
-        }
-
-        // make error red
-        err.message = chalk.red(err.message);
+        // make error cleaner
+        err.message = formatMessage(err.message);
 
         throw err;
       });
   }
 };
+
+function formatMessage(message) {
+  const pathRegEx = /-- ([A-Z ]+)( -+ )(.+)/g;
+
+  let tidyMessage = message
+    .replace(/Compilation failed\s+\[=+\] - \d \/ \d/, "")
+    .replace(pathRegEx, pathFix)
+    .replace(/Detected errors in/, "\n\nDetected errors in")
+    .replace(/\^+/g, makeRed);
+
+  return wrapMarkers(" Elm Complier Errors ", tidyMessage);
+}
+
+function wrapMarkers(title, message) {
+  let lineLengths = message.split("\n").map(s => {
+    return s.trim().length;
+  });
+  let errWidth = Math.max.apply(Math, lineLengths);
+  let startMarker = title
+    .padStart(Math.floor((errWidth - title.length) / 2), "=")
+    .padEnd(errWidth, "=");
+  let endMarker = "=".repeat(errWidth);
+
+  return `
+
+${startMarker}
+
+${message}
+
+${endMarker}
+`;
+}
+
+function makeRed(match) {
+  return chalk.red(match);
+}
+
+function pathFix(match, errType, connector, tempPath) {
+  const cleanPath = tempPath
+    .replace(process.cwd(), "")
+    .split(path.sep)
+    .slice(3)
+    .join(path.sep);
+
+  return `-- ${chalk.red(errType)}${connector}${chalk.yellow(cleanPath)}`;
+}
