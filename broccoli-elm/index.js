@@ -4,7 +4,6 @@ const fs = require("fs");
 const chalk = require("chalk");
 const mkdirp = require("mkdirp");
 const path = require("path");
-const moduleNoise = require("./module-noise");
 
 const optionDefaults = {};
 
