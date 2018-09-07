@@ -1,6 +1,5 @@
-
-import Ember from 'ember'
-import hbs from 'htmlbars-inline-precompile'
+import Ember from "ember";
+import hbs from "htmlbars-inline-precompile";
 
 export default Ember.Component.extend({
   layout: hbs`{{yield}}`,
@@ -15,11 +14,11 @@ export default Ember.Component.extend({
   setup(ports) {},
 
   didReceiveAttrs() {
-    if (!this.src) throw new Error('elm-component missing src object')
+    if (!this.src) throw new Error("elm-component missing src object");
   },
 
   didInsertElement() {
-    const { ports } = this.src.embed(this.element, this.flags)
-    this.setup(ports)
+    const { ports } = this.src.embed(this.element, this.flags);
+    this.setup(ports);
   }
-})
+});
