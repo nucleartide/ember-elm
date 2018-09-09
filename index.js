@@ -1,16 +1,16 @@
-const ElmCompiler = require('./broccoli-elm')
-const BroccoliMergeTrees = require('broccoli-merge-trees')
+const ElmCompiler = require("./broccoli-elm");
+const BroccoliMergeTrees = require("broccoli-merge-trees");
 
 class ElmPlugin {
   constructor(options) {
-    this.name = 'ember-elm';
-    this.ext = 'elm';
+    this.name = "ember-elm";
+    this.ext = "elm";
     this.options = options;
   }
 
   toTree(tree, inputPath, outputPath) {
     // Ignore elm outside of the main app, so we don't try to compile tests.
-    if (inputPath != '/') {
+    if (inputPath != "/") {
       return tree;
     }
     // tree.destDir is undefined when tree is a BroccoliMergeTree.
@@ -29,15 +29,15 @@ class ElmPlugin {
  */
 
 module.exports = {
-  name: 'ember-elm',
+  name: "ember-elm",
 
   setupPreprocessorRegistry(type, registry) {
     // No need to try to compile elm within the addon
-    if (type == 'parent') {
+    if (type == "parent") {
       let app = this.app || this;
       let options = app.options || {};
       let elmOptions = options.elm;
-      registry.add('js', new ElmPlugin(elmOptions));
+      registry.add("js", new ElmPlugin(elmOptions));
     }
   }
-}
+};

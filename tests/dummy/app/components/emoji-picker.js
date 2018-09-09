@@ -1,11 +1,10 @@
-
-import Ember from 'ember'
-import hbs from 'htmlbars-inline-precompile'
+import Ember from "ember";
+import hbs from "htmlbars-inline-precompile";
 
 export default Ember.Component.extend({
-  classNames: 'emoji-picker',
+  classNames: "emoji-picker",
 
-  value: '',
+  value: "",
   onChange: undefined,
 
   layout: hbs`
@@ -13,10 +12,10 @@ export default Ember.Component.extend({
   `,
 
   didInsertElement() {
-    this.$('input').emojiPicker()
+    this.$("input").emojiPicker();
   },
 
   willDestroyElement() {
-    this.$('input').emojiPicker('destroy')
+    this.$("input").emojiPicker("destroy");
   }
-})
+});
