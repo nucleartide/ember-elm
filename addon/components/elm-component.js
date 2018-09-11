@@ -18,7 +18,10 @@ export default Ember.Component.extend({
   },
 
   didInsertElement() {
-    const { ports } = this.src.embed(this.element, this.flags);
+    const { ports } = this.src.init({
+      node: this.element,
+      flags: this.flags
+    });
     this.setup(ports);
   }
 });
