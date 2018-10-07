@@ -1,3 +1,9 @@
+# Changelog
+
+v0.3.0 / 2018-09-23
+==================
+  * Elm 0.19 upgrade #21
+  * Fix yarn.lock registry links #26
 
 v0.2.1 / 2017-10-03
 ==================
