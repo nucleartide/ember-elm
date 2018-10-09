@@ -60,10 +60,10 @@ module.exports = class ElmCompiler extends CachingWriter {
           define('${
             this.destDir
           }/elm-modules', ['exports'], function (exports) {
-            exports['default'] = Elm;
+            exports['default'] = this['Elm'];
           });
         } else {
-          exports['default'] = Elm;
+          exports['default'] = this['Elm'];
         }`;
 
         // build

@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from "ember-qunit";
 import hbs from "htmlbars-inline-precompile";
-import Elm from "dummy/tests/elm-modules";
+import Elm from "dummy/elm-modules";
 
 moduleForComponent("elm-component", "Integration | Component | elm component", {
   integration: true
