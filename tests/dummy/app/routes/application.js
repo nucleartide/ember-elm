@@ -1,7 +1,7 @@
-import Ember from "ember";
+import Route from '@ember/routing/route';
 import Elm from "dummy/elm-modules";
 
-export default Ember.Route.extend({
+export default Route.extend({
   sendToElm(emojis) {},
 
   setupController(controller, model) {

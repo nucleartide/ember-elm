@@ -1,3 +1,5 @@
+'use strict';
+
 const ElmCompiler = require("./broccoli-elm");
 const BroccoliMergeTrees = require("broccoli-merge-trees");
 
