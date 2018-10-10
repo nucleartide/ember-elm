@@ -11,6 +11,7 @@ export default Component.extend({
   flags: undefined,
 
   // function that is passed the Elm module's ports
+  // eslint-disable-next-line
   setup(ports) {},
 
   didReceiveAttrs() {
