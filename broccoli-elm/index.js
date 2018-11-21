@@ -54,16 +54,19 @@ module.exports = class ElmCompiler extends CachingWriter {
 
         // fix module exports
         jsStr =
-          jsStr +
           `
+          var elmScope = {};
+          (function() {
+            ${jsStr}
+          }).call(elmScope)
         if (typeof exports == 'undefined') {
           define('${
             this.destDir
           }/elm-modules', ['exports'], function (exports) {
-            exports['default'] = Elm;
+            exports['default'] = elmScope.Elm;
           });
         } else {
-          exports['default'] = Elm;
+          exports['default'] = elmScope.Elm;
         }`;
 
         // build

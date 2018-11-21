@@ -1,7 +1,7 @@
-import Ember from "ember";
+import Component from '@ember/component';
 import hbs from "htmlbars-inline-precompile";
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout: hbs`{{yield}}`,
 
   // Elm module
@@ -11,6 +11,7 @@ export default Ember.Component.extend({
   flags: undefined,
 
   // function that is passed the Elm module's ports
+  // eslint-disable-next-line
   setup(ports) {},
 
   didReceiveAttrs() {
