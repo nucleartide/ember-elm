@@ -31,7 +31,7 @@ class ElmPlugin {
  */
 
 module.exports = {
-  name: "ember-elm",
+  name: require('./package').name,
 
   setupPreprocessorRegistry(type, registry) {
     // No need to try to compile elm within the addon
