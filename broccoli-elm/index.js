@@ -85,26 +85,13 @@ function formatMessage(message) {
     .replace(/Detected errors in/, "\n\nDetected errors in")
     .replace(/\^+/g, makeRed);
 
-  return wrapMarkers(" Elm Complier Errors ", tidyMessage);
-}
-
-function wrapMarkers(title, message) {
-  let lineLengths = message.split("\n").map(s => {
-    return s.trim().length;
-  });
-  let errWidth = Math.max.apply(Math, lineLengths);
-  let startMarker = title
-    .padStart(Math.floor((errWidth - title.length) / 2), "=")
-    .padEnd(errWidth, "=");
-  let endMarker = "=".repeat(errWidth);
-
   return `
 
-${startMarker}
+================= Elm Complier Errors =================
 
-${message}
+${tidyMessage}
 
-${endMarker}
+================= Elm Complier Errors =================
 `;
 }
 
