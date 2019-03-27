@@ -1,5 +1,9 @@
 # Changelog
 
+[Unreleased]
+==================
+  * Update ember version to 3.4.8
+
 v0.3.0 / 2018-09-23
 ==================
   * Elm 0.19 upgrade #21

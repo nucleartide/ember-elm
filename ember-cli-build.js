@@ -3,13 +3,7 @@
 const EmberAddon = require("ember-cli/lib/broccoli/ember-addon");
 
 module.exports = function(defaults) {
-  var app = new EmberAddon(defaults, {
-    babel: {
-      compact: false
-    },
-
-    nodeModulesToVendor: ["node_modules/jquery-emoji-picker"]
-  });
+  var app = new EmberAddon(defaults, {});
 
   /*
     This build file specifies the options for the dummy test app of this
@@ -18,10 +12,10 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  app.import("vendor/css/jquery.emojipicker.css");
-  app.import("vendor/css/jquery.emojipicker.a.css");
-  app.import("vendor/js/jquery.emojipicker.js");
-  app.import("vendor/js/jquery.emojis.js");
+  app.import("node_modules/jquery-emoji-picker/css/jquery.emojipicker.css");
+  app.import("node_modules/jquery-emoji-picker/css/jquery.emojipicker.a.css");
+  app.import("node_modules/jquery-emoji-picker/js/jquery.emojipicker.js");
+  app.import("node_modules/jquery-emoji-picker/js/jquery.emojis.js");
 
   return app.toTree();
 };
