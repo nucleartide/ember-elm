@@ -3,6 +3,7 @@
 [Unreleased]
 ==================
   * Update ember version to 3.4.8
+  * Fix build with no Elm files
 
 v0.3.0 / 2018-09-23
 ==================
