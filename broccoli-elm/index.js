@@ -87,11 +87,11 @@ function formatMessage(message) {
 
   return `
 
-================= Elm Complier Errors =================
+================= Elm Compiler Errors =================
 
 ${tidyMessage}
 
-================= Elm Complier Errors =================
+================= Elm Compiler Errors =================
 `;
 }
 
