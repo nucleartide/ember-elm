@@ -1,9 +1,10 @@
-port module Chat exposing (main)
+port module Main.Chat exposing (main)
 
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Hello.Label
 
 
 main =
@@ -73,11 +74,9 @@ port emoji : (String -> msg) -> Sub msg
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Sub.none
+    emoji NewEmoji
 
 
-
--- Sub.batch [ WS.listen server NewMessage, emoji NewEmoji ]
 --
 -- View.
 --
@@ -87,7 +86,7 @@ view : Model -> Html Msg
 view model =
     div [ class "chat-container" ]
         [ input [ class "chat-message-input", onInput Input, value model.input ] []
-        , button [ onClick Send ] [ text "Send" ]
+        , button [ onClick Send ] [ text Hello.Label.text ]
         , div [ class "chat-messages" ] (List.map viewMessage (List.reverse model.messages))
         ]
 

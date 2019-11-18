@@ -3,7 +3,11 @@
 const EmberAddon = require("ember-cli/lib/broccoli/ember-addon");
 
 module.exports = function(defaults) {
-  var app = new EmberAddon(defaults, {});
+  var app = new EmberAddon(defaults, {
+    elm: {
+      includePath: 'tests/dummy/app/elm-modules/Main'
+    }
+  });
 
   /*
     This build file specifies the options for the dummy test app of this
