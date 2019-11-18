@@ -4,7 +4,7 @@ const ElmCompiler = require("./broccoli-elm");
 const BroccoliMergeTrees = require("broccoli-merge-trees");
 
 var defaultOptions = {
-  includePath: undefined
+  includePaths: []
 };
 
 class ElmPlugin {
@@ -24,19 +24,19 @@ class ElmPlugin {
       return tree;
     }
 
-    var elmTargets = tree;
-    if (this.options.includePath) {
-      elmTargets = this.options.includePath;
+    var elmTargets = [tree];
+    if (this.options.includePaths.length > 0) {
+      elmTargets = this.options.includePaths;
     }
 
     var elmOptions = Object.assign({}, this.options);
-    delete elmOptions.includePath;
+    delete elmOptions.includePaths;
 
     // tree.destDir is undefined when tree is a BroccoliMergeTree.
     // So we use outputPath instead, which seems to work.
     const destDir = tree.destDir || outputPath;
     const jsTree = tree;
-    const elmTree = new ElmCompiler([elmTargets], destDir, elmOptions);
+    const elmTree = new ElmCompiler(elmTargets, destDir, elmOptions);
     return new BroccoliMergeTrees([jsTree, elmTree]);
   }
 }

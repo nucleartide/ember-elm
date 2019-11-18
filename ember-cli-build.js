@@ -5,7 +5,7 @@ const EmberAddon = require("ember-cli/lib/broccoli/ember-addon");
 module.exports = function(defaults) {
   var app = new EmberAddon(defaults, {
     elm: {
-      includePath: 'tests/dummy/app/elm-modules/Main'
+      includePaths: ['tests/dummy/app/elm-modules/Main']
     }
   });
 

@@ -68,8 +68,11 @@ module.exports = class ElmCompiler extends CachingWriter {
         fs.writeFileSync(path.join(dir, "elm-modules.js"), jsStr);
       })
       .catch(err => {
-        // make error cleaner
-        err.message = formatMessage(err.message);
+        if (err.message) {
+
+          // make error cleaner
+          err.message = formatMessage(err.message);
+        }
 
         throw err;
       });

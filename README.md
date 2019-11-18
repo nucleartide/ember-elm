@@ -96,7 +96,7 @@ import Elm from 'my-app/elm-modules'
 export default Ember.Route.extend({
   setupController(controller, model) {
     controller.set('Elm', Elm)
-  } 
+  }
 })
 ```
 
@@ -156,6 +156,32 @@ export default Ember.Controller.extend({
 ```
 
 ## Notes
+
+### main
+
+Compilation of Elm files in version 0.19.1 requires a `main` value for all files
+passed to `elm-make`.
+
+```
+-- NO MAIN ---------------------------------------------------------------------
+
+When producing a JS file, I require that given files all have `main` values.
+That way functions like Elm.CSS.ChatConversationStyle.init() are definitely
+defined in the resulting file. I am missing `main` values in:
+
+... cut for brevity ...
+```
+
+To target only files that have `main` values, use the ember-elm `includePaths`
+configuration option in `ember-cli-build.js` to limited compliation to only
+safe directories.  The elm compiler will handle including any other module
+dependencies.
+
+```js
+elm: {
+  includePaths: ['app/elm-modules/Main']
+}
+```
 
 ### elm-stuff
 
