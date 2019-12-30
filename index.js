@@ -56,7 +56,24 @@ module.exports = {
       let app = this.app || this;
       let options = app.options || {};
       let elmOptions = options.elm || {};
+
+      // We need to make sure ember-cli-babel runs after the elm compilation
+      // because it wraps the compilation output in the AMD module loader.
+      // Likely all preprocessors need to run after elm compilation , so we move them all to the back to the line.
+      // WARNING: in some projects ember-cli-babel gets added to the js registry
+      // by default, giving the impression this isn't needed.  These lines are for projects that aren't so lucky.
+      let existingPreprocessors = registry.registeredForType('js');
+
+      // registeredForType returns the internal copy, that would get mutated
+      // by the lines below.
+      let preprocessorsBeforeElm = existingPreprocessors.slice(0);
+      preprocessorsBeforeElm.forEach(preprocessor =>
+          registry.remove('js', preprocessor)
+      );
       registry.add("js", new ElmPlugin(elmOptions));
+      preprocessorsBeforeElm.forEach(preprocessor =>
+          registry.add('js', preprocessor)
+      );
     }
   }
 };

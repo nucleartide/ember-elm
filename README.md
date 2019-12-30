@@ -173,7 +173,7 @@ defined in the resulting file. I am missing `main` values in:
 ```
 
 To target only files that have `main` values, use the ember-elm `includePaths`
-configuration option in `ember-cli-build.js` to limited compliation to only
+configuration option in `ember-cli-build.js` to limit compliation to only
 safe directories.  The elm compiler will handle including any other module
 dependencies.
 
