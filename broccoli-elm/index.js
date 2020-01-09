@@ -44,13 +44,16 @@ module.exports = class ElmCompiler extends CachingWriter {
 
   build() {
     let options = Object.assign({}, this.options);
-    return compileToString(this.listFiles(), options)
+    let files = this.listFiles();
+    if (!files.length) {
+      // Nothing to build
+      return;
+    }
+
+    return compileToString(files, options)
       .then(data => {
         // elm-make output
         let jsStr = data.toString();
-
-        // if there are no Elm files to compile, do nothing
-        if (!jsStr) return;
 
         // fix module exports
         jsStr =
