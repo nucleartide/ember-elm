@@ -1,6 +1,6 @@
 {
   "name": "ember-elm",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Write Elm in your Ember app",
   "keywords": [
     "ember-addon",
