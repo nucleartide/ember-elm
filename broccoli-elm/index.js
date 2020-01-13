@@ -31,7 +31,7 @@ module.exports = class ElmCompiler extends CachingWriter {
       {
         debug: useDebug,
         optimize: optimize,
-	mainDirs: mainDirs
+        mainDirs: mainDirs
       },
       optionDefaults,
       options
