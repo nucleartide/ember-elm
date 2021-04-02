@@ -11,7 +11,7 @@ module("Integration | Component | elm component", function(hooks) {
   test("it works", async function(assert) {
     const done = assert.async();
     this.set("Elm", Elm);
-    await render(hbs`{{elm-component src=Elm.Hello}}`);
+    await render(hbs`{{elm-component src=Elm.Main.Hello}}`);
 
     run.next(() => {
       assert.dom(this.element).hasText("hello world");

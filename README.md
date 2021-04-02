@@ -96,7 +96,7 @@ import Elm from 'my-app/elm-modules'
 export default Ember.Route.extend({
   setupController(controller, model) {
     controller.set('Elm', Elm)
-  } 
+  }
 })
 ```
 
@@ -156,6 +156,20 @@ export default Ember.Controller.extend({
 ```
 
 ## Notes
+
+### main
+
+`ember-elm` requires your elm files w/ `main` values to be defined in a separate directory 
+than the rest of your elm code.  By default this is set to `/elm-modules/Main/`, which will match everything 
+in `<your app>/elm-module/Main/`.  Those files can then be used to import other elm files living outside of `/elm-modules/Main/`.
+
+To specify a different location, override `mainDirs` in `ember-cli-build.js` like:
+
+```js
+elm: {
+  mainDirs: ['/elm-modules/AnotherMain']
+}
+```
 
 ### elm-stuff
 

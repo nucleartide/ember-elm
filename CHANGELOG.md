@@ -1,8 +1,12 @@
 # Changelog
 
-[Unreleased]
+v1.0.1 / 2020-01-09
 ==================
-  * Update ember version to 3.4.8
+  * Fix build with no Elm files
+
+v1.0.0 / 2020-01-09
+==================
+  * Upgrade to Elm 0.19.1
 
 v0.3.0 / 2018-09-23
 ==================

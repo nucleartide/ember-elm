@@ -26,10 +26,12 @@ module.exports = class ElmCompiler extends CachingWriter {
     this.destDir = destDir;
     let useDebug = process.env.EMBER_ENV != "production";
     let optimize = process.env.EMBER_ENV == "production";
+    let mainDirs = ['/elm-modules/Main/'];
     this.options = Object.assign(
       {
         debug: useDebug,
-        optimize: optimize
+        optimize: optimize,
+        mainDirs: mainDirs
       },
       optionDefaults,
       options
@@ -44,13 +46,23 @@ module.exports = class ElmCompiler extends CachingWriter {
 
   build() {
     let options = Object.assign({}, this.options);
-    return compileToString(this.listFiles(), options)
+    let files = this.listFiles();
+    let mainFiles = files.filter(file => 
+            options.mainDirs.some(mainDir =>
+              file.includes(mainDir)
+            ));
+
+    if (!mainFiles.length) {
+      // Nothing to build
+      return;
+    }
+
+    // mainDirs is consumed by ember-elm, and shouldn't be sent along to node-elm-compiler
+    delete options.mainDirs;
+    return compileToString(mainFiles, options)
       .then(data => {
         // elm-make output
         let jsStr = data.toString();
-
-        // if there are no Elm files to compile, do nothing
-        if (!jsStr) return;
 
         // fix module exports
         jsStr =
@@ -68,8 +80,11 @@ module.exports = class ElmCompiler extends CachingWriter {
         fs.writeFileSync(path.join(dir, "elm-modules.js"), jsStr);
       })
       .catch(err => {
-        // make error cleaner
-        err.message = formatMessage(err.message);
+        if (err.message) {
+
+          // make error cleaner
+          err.message = formatMessage(err.message);
+        }
 
         throw err;
       });
@@ -87,11 +102,11 @@ function formatMessage(message) {
 
   return `
 
-================= Elm Complier Errors =================
+================= Elm Compiler Errors =================
 
 ${tidyMessage}
 
-================= Elm Complier Errors =================
+================= Elm Compiler Errors =================
 `;
 }
 
