@@ -26,10 +26,12 @@ module.exports = class ElmCompiler extends CachingWriter {
     this.destDir = destDir;
     let useDebug = process.env.EMBER_ENV != "production";
     let optimize = process.env.EMBER_ENV == "production";
+    let mainDirs = ['/elm-modules/Main/'];
     this.options = Object.assign(
       {
         debug: useDebug,
-        optimize: optimize
+        optimize: optimize,
+        mainDirs: mainDirs
       },
       optionDefaults,
       options
@@ -45,12 +47,19 @@ module.exports = class ElmCompiler extends CachingWriter {
   build() {
     let options = Object.assign({}, this.options);
     let files = this.listFiles();
-    if (!files.length) {
+    let mainFiles = files.filter(file => 
+            options.mainDirs.some(mainDir =>
+              file.includes(mainDir)
+            ));
+
+    if (!mainFiles.length) {
       // Nothing to build
       return;
     }
 
-    return compileToString(files, options)
+    // mainDirs is consumed by ember-elm, and shouldn't be sent along to node-elm-compiler
+    delete options.mainDirs;
+    return compileToString(mainFiles, options)
       .then(data => {
         // elm-make output
         let jsStr = data.toString();
